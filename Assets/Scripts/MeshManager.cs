@@ -5,6 +5,7 @@ public class MeshManager : MonoBehaviour
 {
     private MeshFilter _sphereMeshFilter;
     private MeshFilter _coneMeshFilter;
+    public Material goMaterial;
 
     public bool showSphere = true;
     public int sphereLatCount = 20; //Horizontal lines count
@@ -39,7 +40,7 @@ public class MeshManager : MonoBehaviour
 
         _sphereMeshFilter = sphereGo.AddComponent<MeshFilter>();
         MeshRenderer sphereRenderer = sphereGo.AddComponent<MeshRenderer>();
-        sphereRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        sphereRenderer.material = goMaterial;
     }
 
     private void ConeMeshSetup()
@@ -50,7 +51,7 @@ public class MeshManager : MonoBehaviour
 
         _coneMeshFilter = coneGo.AddComponent<MeshFilter>();
         MeshRenderer coneRenderer = coneGo.AddComponent<MeshRenderer>();
-        coneRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+        coneRenderer.material = goMaterial;
     }
 
     //Generate a sphere mesh procedurally based on latitude, longitude and sphereRadius

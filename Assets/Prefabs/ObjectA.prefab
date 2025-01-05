@@ -44,9 +44,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cef8782cfef764faea19cb7cf92ec627, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goMaterial: {fileID: 2100000, guid: d165f2f958ecb4be388d34869fc18902, type: 2}
   showSphere: 1
-  sphereLatCount: 20
-  sphereLonCount: 20
+  sphereLatCount: 50
+  sphereLonCount: 50
   sphereRadius: 1
   showCone: 1
   coneSegments: 20
