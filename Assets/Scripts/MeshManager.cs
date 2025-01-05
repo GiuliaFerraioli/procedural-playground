@@ -5,12 +5,14 @@ public class MeshManager : MonoBehaviour
 {
     private MeshFilter _sphereMeshFilter;
     private MeshFilter _coneMeshFilter;
-    public Material goMaterial;
 
-    public bool showSphere = true;
+    [Header("Objects material")]
+    public Material goMaterial;
+    [Header("Sphere parameters")] public bool showSphere = true;
     public int sphereLatCount = 20; //Horizontal lines count
     public int sphereLonCount = 20; //Vertical lines count
     public float sphereRadius = 1f;
+    [Header("Cone parameters")]
     public bool showCone = true;
     public int coneSegments = 20;
     public float coneHeight = 0.5f;

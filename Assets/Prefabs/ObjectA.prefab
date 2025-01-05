@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3624688405711780075}
   - component: {fileID: 6915961208623419076}
+  - component: {fileID: 5390722868304540657}
   m_Layer: 0
   m_Name: ObjectA
   m_TagString: Untagged
@@ -53,3 +54,22 @@ MonoBehaviour:
   coneSegments: 20
   coneHeight: 0.5
   coneRadius: 0.3
+--- !u!114 &5390722868304540657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6265358642012932744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5d1aacbadc4c4b4b9ead32a8f883547, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToAnimate: {fileID: 3624688405711780075}
+  animateToggle: {fileID: 0}
+  t: 0
+  timeMultiplier: 2
+  amplitudeMultiplier: 1
+  xPositionOffset: 0
+  yPositionOffset: 0
