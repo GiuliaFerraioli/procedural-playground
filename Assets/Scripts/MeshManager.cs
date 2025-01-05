@@ -3,68 +3,173 @@ using UnityEditor;
 
 public class MeshManager : MonoBehaviour
 {
-    private MeshFilter meshFilter;
+    private MeshFilter _sphereMeshFilter;
+    private MeshFilter _coneMeshFilter;
 
-    public int latCount = 20; //Horizontal lines count
-    public int lonCount = 20; //Vertical lines count
-    public float radius = 1f;       
+    public bool showSphere = true;
+    public int sphereLatCount = 20; //Horizontal lines count
+    public int sphereLonCount = 20; //Vertical lines count
+    public float sphereRadius = 1f;
+    public bool showCone = true;
+    public int coneSegments = 20;
+    public float coneHeight = 0.5f;
+    public float coneRadius = 0.3f;
 
     private void Start()
     {
-        meshFilter = GetComponent<MeshFilter>();
-        ProceduralSphere();
+        if (showSphere)
+        {
+            SphereMeshSetup();
+            ProceduralSphereGenerator();
+        }
+
+        if (showCone)
+        {
+            ConeMeshSetup();
+            ProceduralConeGenerator();
+        }
+
     }
 
-    public void ProceduralSphere()
+    private void SphereMeshSetup()
+    {
+        GameObject sphereGo = new GameObject("Sphere");
+        sphereGo.transform.SetParent(transform);
+        sphereGo.transform.localPosition = new Vector3(0, 0, 2);
+
+        _sphereMeshFilter = sphereGo.AddComponent<MeshFilter>();
+        MeshRenderer sphereRenderer = sphereGo.AddComponent<MeshRenderer>();
+        sphereRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+    }
+
+    private void ConeMeshSetup()
+    {
+        GameObject coneGo = new GameObject("Cone");
+        coneGo.transform.SetParent(transform);
+        coneGo.transform.localPosition = Vector3.zero;
+
+        _coneMeshFilter = coneGo.AddComponent<MeshFilter>();
+        MeshRenderer coneRenderer = coneGo.AddComponent<MeshRenderer>();
+        coneRenderer.material = new Material(Shader.Find("Universal Render Pipeline/Lit"));
+    }
+
+    //Generate a sphere mesh procedurally based on latitude, longitude and sphereRadius
+    public void ProceduralSphereGenerator()
     {
         Mesh mesh = new Mesh();
 
-        //The total vertices and triangles calculation is based on latitude and longitude lines
-        Vector3[] vertices = new Vector3[(latCount + 1) * (lonCount + 1)];
-        int[] triangles = new int[latCount * lonCount * 6];
+        //Arrays to store vertex positions and triangle indices
+        int vertexCount = (sphereLatCount + 1) * (sphereLonCount + 1);
+        Vector3[] vertices = new Vector3[vertexCount];
+        int triangleCount = sphereLatCount * sphereLonCount * 6;
+        int[] triangles = new int[triangleCount];
 
         int vertexIndex = 0;
-        //Generating vertices for the sphere
-        for (int lat = 0; lat <= latCount; lat++)
-        {
-            //Lerping the y pos between -radius and +radius
-            float y = Mathf.Lerp(-radius, radius, (float)lat / latCount); 
-            float currentRadius = Mathf.Sqrt(radius * radius - y * y);
 
-            for (int lon = 0; lon <= lonCount; lon++)
+        //Loop to generate vertices for the sphere
+        for (int lat = 0; lat <= sphereLatCount; lat++)
+        {
+            //Interpolate the y pos between -sphereRadius and +sphereRadius
+            float y = Mathf.Lerp(-sphereRadius, sphereRadius, (float)lat / sphereLatCount);
+
+            //Radius of the circle at the current latitude
+            float circleRadius = Mathf.Sqrt(sphereRadius * sphereRadius - y * y);
+
+            for (int lon = 0; lon <= sphereLonCount; lon++)
             {
-                //Calculating the angle around the latitude line
-                float angle = (float)lon / lonCount * Mathf.PI * 2;
-                //Converting from polar coord to cartesian coord, as its accepted by Unity
-                float x = currentRadius * Mathf.Cos(angle); 
-                float z = currentRadius * Mathf.Sin(angle); 
+                //Calculate the angle around the circle for the current longitude
+                float angle = (float)lon / sphereLonCount * Mathf.PI * 2;
+
+                //Convert from polar coordinates to cartesian coordinates
+                float x = circleRadius * Mathf.Cos(angle);
+                float z = circleRadius * Mathf.Sin(angle);
+
+                //Store vertex position
                 vertices[vertexIndex] = new Vector3(x, y, z);
                 vertexIndex++;
             }
         }
 
         int triangleIndex = 0;
-        //Generating the triangles to connect the vertices to a mesh
-        for (int lat = 0; lat < latCount; lat++)
+
+        //Loop to generate triangles connecting the vertices
+        for (int lat = 0; lat < sphereLatCount; lat++)
         {
-            for (int lon = 0; lon < lonCount; lon++)
+            for (int lon = 0; lon < sphereLonCount; lon++)
             {
-                int current = lat * (lonCount + 1) + lon;
-                int next = current + lonCount + 1;
-                //First half of the triangle
-                triangles[triangleIndex++] = current;
-                triangles[triangleIndex++] = next;
-                triangles[triangleIndex++] = current + 1;
-                //Second half of the triangle
-                triangles[triangleIndex++] = current + 1;
-                triangles[triangleIndex++] = next;
-                triangles[triangleIndex++] = next + 1;
+                int currentVertex = lat * (sphereLonCount + 1) + lon;
+                int nextRowVertex = currentVertex + sphereLonCount + 1;
+
+                //First triangle of the quad
+                triangles[triangleIndex] = currentVertex;
+                triangles[triangleIndex + 1] = nextRowVertex;
+                triangles[triangleIndex + 2] = currentVertex + 1;
+
+                //Second triangle of the quad   
+                triangles[triangleIndex + 3] = currentVertex + 1;
+                triangles[triangleIndex + 4] = nextRowVertex;
+                triangles[triangleIndex + 5] = nextRowVertex + 1;
+
+                triangleIndex += 6;
             }
-        }  
+        }
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        mesh.RecalculateNormals(); //Needed to reflect lighting
-        meshFilter.mesh = mesh;
+        mesh.RecalculateNormals(); //Calculate normals to reflect lighting
+        _sphereMeshFilter.mesh = mesh;
     }
+
+    //Generate a cone mesh procedurally based on coneHeight, coneRadius, and coneSegments
+    private void ProceduralConeGenerator()
+    {
+        Mesh mesh = new Mesh();
+        Vector3[] vertices = new Vector3[coneSegments + 2];
+
+        //Top of the cone
+        vertices[0] = new Vector3(0, coneHeight, 0);
+
+        //Loop to generate vertices around the cone base
+        for (int i = 0; i < coneSegments; i++)
+        {
+            float angle = i * Mathf.PI * 2 / coneSegments;
+            float x = Mathf.Cos(angle) * coneRadius;
+            float z = Mathf.Sin(angle) * coneRadius;
+            vertices[i + 1] = new Vector3(x, 0, z);
+        }
+
+        //Last vertex is the centre of the base
+        vertices[coneSegments + 1] = Vector3.zero;
+
+        //Trainlges for the cone side and base
+        int[] triangles = new int[coneSegments * 6];
+        int triangleIndex = 0;
+
+        //Loop to generate side triangles
+        for (int i = 0; i < coneSegments; i++)
+        {
+            triangles[triangleIndex] = 0; //Top
+            triangles[triangleIndex + 1] = i + 1; //Base vertex
+            triangles[triangleIndex + 2] = ((i + 1) % coneSegments) + 1; //Next base vertex
+
+            triangleIndex += 3;
+        }
+
+        //Loop to generate base traingles
+        for (int i = 0; i < coneSegments; i++)
+        {
+            triangles[triangleIndex] = coneSegments + 1; //Center of base
+            triangles[triangleIndex + 1] = ((i + 1) % coneSegments) + 1; //Next base vertex
+            triangles[triangleIndex + 2] = i + 1; //Current base vertex
+
+            triangleIndex += 3;
+        }
+
+        mesh.vertices = vertices;
+        mesh.triangles = triangles;
+        mesh.RecalculateNormals();
+        _coneMeshFilter.mesh = mesh;
+    }
+
+
 }
