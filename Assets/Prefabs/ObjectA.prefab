@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3624688405711780075}
   - component: {fileID: 6915961208623419076}
   - component: {fileID: 5390722868304540657}
+  - component: {fileID: 167171767570633357}
   m_Layer: 0
   m_Name: ObjectA
   m_TagString: Untagged
@@ -68,8 +69,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToAnimate: {fileID: 3624688405711780075}
   animateToggle: {fileID: 0}
-  t: 0
-  timeMultiplier: 2
-  amplitudeMultiplier: 1
-  xPositionOffset: 0
-  yPositionOffset: 0
+--- !u!114 &167171767570633357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6265358642012932744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32b904ca024aa41ca8faab9382ccad12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotateToggle: {fileID: 0}
+  targetObject: {fileID: 0}
+  rotationSpeed: 200
+  moveSpeed: 5

@@ -18,7 +18,7 @@ public class MeshManager : MonoBehaviour
     public float coneHeight = 0.5f;
     public float coneRadius = 0.3f;
 
-    private void Start()
+    private void Awake()
     {
         if (showSphere)
         {

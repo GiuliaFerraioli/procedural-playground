@@ -17,6 +17,7 @@ public class LissajousMovement : MonoBehaviour
     private float frequencyY;
     private float phaseDelay; //Phase delay between x and y oscillations
     private Vector3 objectOriginalPosition;
+    private bool wasToggleOn;
 
     void Start()
     {
@@ -46,10 +47,12 @@ public class LissajousMovement : MonoBehaviour
             finalPos.y = amplitudeY * Mathf.Sin(frequencyY * time) * amplitudeMultiplier;
             transform.position = finalPos;
         }
-        else
+        else if (wasToggleOn)
         {
             objectToAnimate.position = objectOriginalPosition;
             SetAnimationParameters();
         }
+
+        wasToggleOn = animateToggle.isOn;
     }
 }
