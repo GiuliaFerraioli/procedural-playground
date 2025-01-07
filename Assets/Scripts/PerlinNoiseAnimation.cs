@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PerlinNoiseAnimation : MonoBehaviour
 {
-    public bool isAnimating = false;
+    public Toggle animateToggle;
     public float noiseScale = 1f;
     public float speed = 1f;
     public float amount = 0.5f;
+
+    private bool wasToggleOn;
 
     //Class to store mesh related data for each child
     private class MeshData
@@ -22,7 +25,6 @@ public class PerlinNoiseAnimation : MonoBehaviour
     void Start()
     {
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
-
         //Setup data for each mesh
         foreach (MeshFilter meshFilter in meshFilters)
         {
@@ -44,7 +46,7 @@ public class PerlinNoiseAnimation : MonoBehaviour
 
     void Update()
     {
-        if (isAnimating)
+        if (animateToggle.isOn)
         {
             foreach (MeshData data in meshDataList)
             {
@@ -66,7 +68,7 @@ public class PerlinNoiseAnimation : MonoBehaviour
                 data.clonedMesh.RecalculateBounds();
             }
         }
-        else
+        else if (wasToggleOn)
         {
             //Reset all meshes to their original state
             foreach (MeshData data in meshDataList)
@@ -75,6 +77,8 @@ public class PerlinNoiseAnimation : MonoBehaviour
                 data.clonedMesh.RecalculateBounds();
             }
         }
+        wasToggleOn = animateToggle.isOn;
+
     }
 }
 

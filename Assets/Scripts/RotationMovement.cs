@@ -1,14 +1,16 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RotationMovement : MonoBehaviour
 {
-    public bool isAnimating = false;
+    public Toggle animateToggle;
     public Transform targetObject;
     public float rotationSpeed = 200f;
     public float moveSpeed = 5f;
 
     private Vector3[] initialChildrenPositions;
     private Quaternion[] initialChildrenRotations;
+    private bool wasToggleOn;
 
     void Start()
     {
@@ -24,7 +26,7 @@ public class RotationMovement : MonoBehaviour
 
     void Update()
     {
-        if (isAnimating)
+        if (animateToggle.isOn)
         {
             foreach (Transform child in transform)
             {
@@ -45,7 +47,7 @@ public class RotationMovement : MonoBehaviour
                 }
             }
         }
-        else
+        else if (wasToggleOn)
         {
             //Reset each child to its initial position
             for (int i = 0; i < transform.childCount; i++)
@@ -55,5 +57,6 @@ public class RotationMovement : MonoBehaviour
                 child.rotation = initialChildrenRotations[i];
             }
         }
+        wasToggleOn = animateToggle.isOn;
     }
 }

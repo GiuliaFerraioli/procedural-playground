@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8
+      value: -3.28
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.9608278
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 8.237537
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d1aacbadc4c4b4b9ead32a8f883547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isAnimating: 0
+  animateToggle: {fileID: 0}
   objectToAnimate: {fileID: 4963135571499974529}
 --- !u!4 &4963135571499974529 stripped
 Transform:
