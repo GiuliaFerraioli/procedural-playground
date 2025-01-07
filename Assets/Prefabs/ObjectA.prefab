@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6915961208623419076}
   - component: {fileID: 5390722868304540657}
   - component: {fileID: 167171767570633357}
+  - component: {fileID: 211403415853238749}
   m_Layer: 0
   m_Name: ObjectA
   m_TagString: Untagged
@@ -85,3 +86,17 @@ MonoBehaviour:
   targetObject: {fileID: 0}
   rotationSpeed: 200
   moveSpeed: 5
+--- !u!114 &211403415853238749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6265358642012932744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382ce2ad4e477468e82dd0d4527c4ea1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetObject: {fileID: 0}
+  colourToggle: {fileID: 0}
