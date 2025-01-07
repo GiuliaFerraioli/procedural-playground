@@ -19,8 +19,8 @@ public class RotationMovement : MonoBehaviour
         initialChildrenRotations = new Quaternion[transform.childCount];
         for (int i = 0; i < transform.childCount; i++)
         {
-            initialChildrenPositions[i] = transform.GetChild(i).position;
-            initialChildrenRotations[i] = transform.GetChild(i).rotation;
+            initialChildrenPositions[i] = transform.GetChild(i).localPosition;
+            initialChildrenRotations[i] = transform.GetChild(i).localRotation;
         }
     }
 
@@ -31,7 +31,7 @@ public class RotationMovement : MonoBehaviour
             foreach (Transform child in transform)
             {
                 //Keep the movement on the X axis ignoring Y and Z axes
-                Vector3 direction = targetObject.position - child.position;
+                Vector3 direction = targetObject.localPosition - child.localPosition;
                 direction.y = 0;
                 direction.z = 0;
                 //Distance between the child and the target obj
@@ -42,7 +42,7 @@ public class RotationMovement : MonoBehaviour
                     //We normalize to ensure the speed remain constant
                     direction.Normalize();
                     //Move and rotate until the target is reached
-                    child.position += direction * moveSpeed * Time.deltaTime;
+                    child.localPosition += direction * moveSpeed * Time.deltaTime;
                     child.Rotate(Vector3.up * Time.deltaTime * rotationSpeed, Space.Self);
                 }
             }
@@ -53,8 +53,8 @@ public class RotationMovement : MonoBehaviour
             for (int i = 0; i < transform.childCount; i++)
             {
                 Transform child = transform.GetChild(i);
-                child.position = initialChildrenPositions[i];
-                child.rotation = initialChildrenRotations[i];
+                child.localPosition = initialChildrenPositions[i];
+                child.localRotation = initialChildrenRotations[i];
             }
         }
         wasToggleOn = animateToggle.isOn;

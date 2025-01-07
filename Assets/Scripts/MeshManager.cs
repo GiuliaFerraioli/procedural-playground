@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEditor;
 
 public class MeshManager : MonoBehaviour
 {
@@ -38,7 +37,7 @@ public class MeshManager : MonoBehaviour
     {
         GameObject sphereGo = new GameObject("Sphere");
         sphereGo.transform.SetParent(transform);
-        sphereGo.transform.localPosition = new Vector3(0, 0, 2);
+        sphereGo.transform.localPosition = Vector3.zero;
 
         _sphereMeshFilter = sphereGo.AddComponent<MeshFilter>();
         MeshRenderer sphereRenderer = sphereGo.AddComponent<MeshRenderer>();
@@ -49,7 +48,7 @@ public class MeshManager : MonoBehaviour
     {
         GameObject coneGo = new GameObject("Cone");
         coneGo.transform.SetParent(transform);
-        coneGo.transform.localPosition = Vector3.zero;
+        coneGo.transform.localPosition = new Vector3(0, 0, 2);
 
         _coneMeshFilter = coneGo.AddComponent<MeshFilter>();
         MeshRenderer coneRenderer = coneGo.AddComponent<MeshRenderer>();
@@ -64,6 +63,9 @@ public class MeshManager : MonoBehaviour
         //Arrays to store vertex positions and triangle indices
         int vertexCount = (sphereLatCount + 1) * (sphereLonCount + 1);
         Vector3[] vertices = new Vector3[vertexCount];
+        //Uv coordinates for texture
+        Vector2[] uvs = new Vector2[vertexCount];
+
         int triangleCount = sphereLatCount * sphereLonCount * 6;
         int[] triangles = new int[triangleCount];
 
@@ -74,9 +76,10 @@ public class MeshManager : MonoBehaviour
         {
             //Interpolate the y pos between -sphereRadius and +sphereRadius
             float y = Mathf.Lerp(-sphereRadius, sphereRadius, (float)lat / sphereLatCount);
-
             //Radius of the circle at the current latitude
             float circleRadius = Mathf.Sqrt(sphereRadius * sphereRadius - y * y);
+            float verticalCoord = (float)lat / sphereLatCount;
+
 
             for (int lon = 0; lon <= sphereLonCount; lon++)
             {
@@ -89,6 +92,8 @@ public class MeshManager : MonoBehaviour
 
                 //Store vertex position
                 vertices[vertexIndex] = new Vector3(x, y, z);
+                uvs[vertexIndex] = new Vector2((float)lon / sphereLonCount, verticalCoord);
+
                 vertexIndex++;
             }
         }
@@ -119,6 +124,7 @@ public class MeshManager : MonoBehaviour
 
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        mesh.uv = uvs;
         mesh.RecalculateNormals(); //Calculate normals to reflect lighting
         _sphereMeshFilter.mesh = mesh;
     }

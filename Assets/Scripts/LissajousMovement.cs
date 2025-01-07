@@ -23,7 +23,8 @@ public class LissajousMovement : MonoBehaviour
     void Start()
     {
         SetAnimationParameters();
-        objectOriginalPosition = objectToAnimate.position;
+        objectOriginalPosition = objectToAnimate.localPosition;
+        Debug.Log("" + objectOriginalPosition);
     }
 
     private void SetAnimationParameters()
@@ -43,15 +44,16 @@ public class LissajousMovement : MonoBehaviour
         {
             time = Time.time * timeMultiplier;
             //Calculate the new position and move the object to it
-            Vector3 finalPos = transform.position;
+            Vector3 finalPos = transform.localPosition;
             finalPos.x = amplitudeX * Mathf.Sin((frequencyX * time) + phaseDelay) * amplitudeMultiplier;
             finalPos.y = amplitudeY * Mathf.Sin(frequencyY * time) * amplitudeMultiplier;
-            transform.position = finalPos;
+            transform.localPosition = finalPos;
         }
         else if (wasToggleOn)
         {
-            objectToAnimate.position = objectOriginalPosition;
+            objectToAnimate.localPosition = objectOriginalPosition;
             SetAnimationParameters();
+            Debug.Log("" + objectOriginalPosition);
         }
         wasToggleOn = animateToggle.isOn;
     }
