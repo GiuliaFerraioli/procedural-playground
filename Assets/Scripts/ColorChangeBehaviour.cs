@@ -1,14 +1,11 @@
 using UnityEngine;
-using UnityEngine.UI;
-
 public class ColorChangeBehaviour : MonoBehaviour
 {
+    public bool isAnimating = false;
     public Transform targetObject;
-    public Toggle colourToggle;
 
     private Material[] childrenMaterials;
     private float timer;
-    private bool wasToggleOn;
     private Vector3 objectOriginalPosition;
 
     void Start()
@@ -25,7 +22,7 @@ public class ColorChangeBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (colourToggle.isOn)
+        if (isAnimating)
         {
             timer += Time.deltaTime;
             float x = Mathf.Cos(timer) * 3; //X axis circular offset
@@ -46,7 +43,7 @@ public class ColorChangeBehaviour : MonoBehaviour
             }
 
         }
-        else if (wasToggleOn)
+        else
         {
             //Reset everything
             targetObject.transform.position = objectOriginalPosition;
@@ -56,6 +53,5 @@ public class ColorChangeBehaviour : MonoBehaviour
                 material.color = Color.red;
             }
         }
-        wasToggleOn = colourToggle.isOn;
     }
 }

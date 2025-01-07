@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class LissajousMovement : MonoBehaviour
 {
+    public bool isAnimating = false;
     public Transform objectToAnimate;
-    public Toggle animateToggle;
-
     private float time; //Current time for animation
     private float timeMultiplier = 2f; //Speed of the animation
     private float amplitudeMultiplier = 1f; //Amplitude of the movement
@@ -17,7 +15,6 @@ public class LissajousMovement : MonoBehaviour
     private float frequencyY;
     private float phaseDelay; //Phase delay between x and y oscillations
     private Vector3 objectOriginalPosition;
-    private bool wasToggleOn;
 
     void Start()
     {
@@ -38,7 +35,7 @@ public class LissajousMovement : MonoBehaviour
 
     void Update()
     {
-        if (animateToggle.isOn)
+        if (isAnimating)
         {
             time = Time.time * timeMultiplier;
             //Calculate the new position and move the object to it
@@ -47,12 +44,10 @@ public class LissajousMovement : MonoBehaviour
             finalPos.y = amplitudeY * Mathf.Sin(frequencyY * time) * amplitudeMultiplier;
             transform.position = finalPos;
         }
-        else if (wasToggleOn)
+        else
         {
             objectToAnimate.position = objectOriginalPosition;
             SetAnimationParameters();
         }
-
-        wasToggleOn = animateToggle.isOn;
     }
 }

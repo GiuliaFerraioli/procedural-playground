@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5390722868304540657}
   - component: {fileID: 167171767570633357}
   - component: {fileID: 211403415853238749}
+  - component: {fileID: 7916840759576001050}
   m_Layer: 0
   m_Name: ObjectA
   m_TagString: Untagged
@@ -68,8 +69,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d1aacbadc4c4b4b9ead32a8f883547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimating: 0
   objectToAnimate: {fileID: 3624688405711780075}
-  animateToggle: {fileID: 0}
 --- !u!114 &167171767570633357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32b904ca024aa41ca8faab9382ccad12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateToggle: {fileID: 0}
+  isAnimating: 0
   targetObject: {fileID: 0}
   rotationSpeed: 200
   moveSpeed: 5
@@ -98,5 +99,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 382ce2ad4e477468e82dd0d4527c4ea1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimating: 0
   targetObject: {fileID: 0}
-  colourToggle: {fileID: 0}
+--- !u!114 &7916840759576001050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6265358642012932744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98519dfe461d34ad183a2821b54dd90d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isAnimating: 0
+  noiseScale: 1
+  speed: 1
+  amount: 0.5

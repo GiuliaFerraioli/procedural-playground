@@ -1,21 +1,17 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class RotationMovement : MonoBehaviour
 {
-    public Toggle rotateToggle;
+    public bool isAnimating = false;
     public Transform targetObject;
     public float rotationSpeed = 200f;
     public float moveSpeed = 5f;
 
-    private bool wasToggleOn;
     private Vector3[] initialChildrenPositions;
     private Quaternion[] initialChildrenRotations;
 
     void Start()
     {
-        wasToggleOn = rotateToggle.isOn;
-
         //Store initial rotation and position of each child
         initialChildrenPositions = new Vector3[transform.childCount];
         initialChildrenRotations = new Quaternion[transform.childCount];
@@ -28,7 +24,7 @@ public class RotationMovement : MonoBehaviour
 
     void Update()
     {
-        if (rotateToggle.isOn)
+        if (isAnimating)
         {
             foreach (Transform child in transform)
             {
@@ -49,7 +45,7 @@ public class RotationMovement : MonoBehaviour
                 }
             }
         }
-        else if (wasToggleOn)
+        else
         {
             //Reset each child to its initial position
             for (int i = 0; i < transform.childCount; i++)
@@ -59,6 +55,5 @@ public class RotationMovement : MonoBehaviour
                 child.rotation = initialChildrenRotations[i];
             }
         }
-        wasToggleOn = rotateToggle.isOn;
     }
 }

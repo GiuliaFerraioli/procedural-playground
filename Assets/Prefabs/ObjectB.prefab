@@ -71,6 +71,8 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 5390722868304540657, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
     - {fileID: 167171767570633357, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
+    - {fileID: 211403415853238749, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
+    - {fileID: 7916840759576001050, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -95,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5d1aacbadc4c4b4b9ead32a8f883547, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimating: 0
   objectToAnimate: {fileID: 4963135571499974529}
-  animateToggle: {fileID: 0}
 --- !u!4 &4963135571499974529 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3624688405711780075, guid: a5af692b389354a40ba7019e3e2cd670, type: 3}
