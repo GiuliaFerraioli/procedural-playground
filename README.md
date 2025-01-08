@@ -122,6 +122,12 @@ The **PerlinNoiseAnimation.cs** script is attached to ObjectA. A UI toggle is us
 ### **Challenges**
 Testing with multiple paramenters to find the best range to ensure a smooth animation.
 
+---
+
+## Bonus step: AR/VR integration
+
+For this task, I wanted to try using Magic Leap or AR Foundation since I had never worked with them before. I first tried Magic Leap because it supports hand tracking, but ran into some issues. They recently stopped supporting the application simulator, which I needed to test in the editor since I don’t have a headset. I also tried using OpenXR, but it didn’t support Magic Leap controllers, so I decided to switch to AR Foundation.
+
 
 
 
