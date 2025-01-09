@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class MeshManager : MonoBehaviour
 {
-    private MeshFilter _sphereMeshFilter;
-    private MeshFilter _coneMeshFilter;
+    private MeshFilter sphereMeshFilter;
+    private MeshFilter coneMeshFilter;
 
     [Header("Objects material")]
     public Material goMaterial;
@@ -39,7 +39,7 @@ public class MeshManager : MonoBehaviour
         sphereGo.transform.SetParent(transform);
         sphereGo.transform.localPosition = Vector3.zero;
 
-        _sphereMeshFilter = sphereGo.AddComponent<MeshFilter>();
+        sphereMeshFilter = sphereGo.AddComponent<MeshFilter>();
         MeshRenderer sphereRenderer = sphereGo.AddComponent<MeshRenderer>();
         sphereRenderer.material = goMaterial;
     }
@@ -50,7 +50,7 @@ public class MeshManager : MonoBehaviour
         coneGo.transform.SetParent(transform);
         coneGo.transform.localPosition = new Vector3(0, 0, 2);
 
-        _coneMeshFilter = coneGo.AddComponent<MeshFilter>();
+        coneMeshFilter = coneGo.AddComponent<MeshFilter>();
         MeshRenderer coneRenderer = coneGo.AddComponent<MeshRenderer>();
         coneRenderer.material = goMaterial;
     }
@@ -126,7 +126,7 @@ public class MeshManager : MonoBehaviour
         mesh.triangles = triangles;
         mesh.uv = uvs;
         mesh.RecalculateNormals(); //Calculate normals to reflect lighting
-        _sphereMeshFilter.mesh = mesh;
+        sphereMeshFilter.mesh = mesh;
     }
 
     //Generate a cone mesh procedurally based on coneHeight, coneRadius, and coneSegments
@@ -177,7 +177,7 @@ public class MeshManager : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
-        _coneMeshFilter.mesh = mesh;
+        coneMeshFilter.mesh = mesh;
     }
 
 
