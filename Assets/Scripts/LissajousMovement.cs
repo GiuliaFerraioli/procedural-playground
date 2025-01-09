@@ -24,7 +24,6 @@ public class LissajousMovement : MonoBehaviour
     {
         SetAnimationParameters();
         objectOriginalPosition = objectToAnimate.localPosition;
-        Debug.Log("" + objectOriginalPosition);
     }
 
     private void SetAnimationParameters()
@@ -53,7 +52,6 @@ public class LissajousMovement : MonoBehaviour
         {
             objectToAnimate.localPosition = objectOriginalPosition;
             SetAnimationParameters();
-            Debug.Log("" + objectOriginalPosition);
         }
         wasToggleOn = animateToggle.isOn;
     }
