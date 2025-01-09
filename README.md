@@ -38,6 +38,12 @@ The packages are already included and can be checked or installed by:
 3. Install the required version.
 
 ---
+
+### **Demo video**
+https://youtu.be/3X4w3-jm1ds
+
+---
+
 ### **Implementation Details**
 
 ## Step 1 and 2: Procedural mesh creation and secondary object
