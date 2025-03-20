@@ -1,6 +1,5 @@
-# TestTask_XARlabs
- This project has been developed following the requirements for a Test task for the Unity developer position at XARLabs.
-
+# Procedural Mesh Generation & Dynamic Animations in Unity
+This project focuses on procedural mesh generation and dynamic animations in Unity. Objects are created at runtime with defined vertices and triangles, animated using Lissajous curves, rotated towards targets, and changed color based on angles. Perlin noise is used for vertex animation, adding organic movement
  ## **Setup - Unity Version:  6000.032f1 or above**
 
 ### **Running the Project**
@@ -125,14 +124,6 @@ The **PerlinNoiseAnimation.cs** script is attached to ObjectA. A UI toggle is us
 
 ![Screenshot 2025-01-08 at 11 05 59](https://github.com/user-attachments/assets/834ed4aa-ea0f-4725-a349-fbb24dc0056d)
 
-### **Challenges**
-Testing with multiple paramenters to find the best range to ensure a smooth animation.
-
----
-
-## Bonus step: AR/VR integration
-
-For this task, I wanted to try using Magic Leap or AR Foundation since I had never worked with them before. I first tried Magic Leap because it supports hand tracking, but ran into some issues. They recently stopped supporting the application simulator, which I needed to test in the editor since I don’t have a headset. I also tried using OpenXR, but it didn’t support Magic Leap controllers, so I decided to switch to AR Foundation.
 
 
 
