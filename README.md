@@ -1,4 +1,4 @@
-# Procedural Mesh Generation & Dynamic Animations in Unity
+# Procedural Playground
 This project focuses on procedural mesh generation and dynamic animations in Unity. Objects are created at runtime with defined vertices and triangles, animated using Lissajous curves, rotated towards targets, and changed color based on angles. Perlin noise is used for vertex animation, adding organic movement
  ## **Setup - Unity Version:  6000.032f1 or above**
 
